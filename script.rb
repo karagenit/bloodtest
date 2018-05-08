@@ -12,9 +12,9 @@ def simulate(initial, breakdown, population = 10000, occurrence = 100)
   tests = 0
 
   while population.any?
-    p population
-    puts "Tests: #{tests}"
-    gets
+#   p population
+#   puts "Tests: #{tests}"
+#   gets
     for i in 0...population.length do
       population[i] = population[i].each_slice(initial).to_a
       (population[i].length - 1).downto(0).each do |index|
@@ -29,11 +29,22 @@ def simulate(initial, breakdown, population = 10000, occurrence = 100)
       end
     end
     population.flatten!(1)
-    initial = initial / breakdown
+    initial = (initial / breakdown).round
   end
 
   return tests
 end
 
-puts simulate(1, 1, 100, 1)
-puts simulate(100, 10, 100, 1)
+SIMS = 100
+VARS = [ [10000,10], [1000,10], [100,10], [10,10], [1,10] ]
+
+puts "Simulating 1% of 10,000..."
+puts "Running each simulation #{SIMS} times..."
+
+VARS.each do |initial, breakdown|
+  testsTotal = 0
+  for i in 1..SIMS do
+    testsTotal += simulate(initial, breakdown)
+  end
+  puts "Staring at #{initial}... \tdividing by #{breakdown}...\tAverage Tests: #{testsTotal/SIMS}"
+end
