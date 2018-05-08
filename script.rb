@@ -4,7 +4,7 @@
 # Initial size to pool by
 # Divisor to break down by
 #
-def simulate(initial, breakdown, population = 10000, occurrence = 0.01)
+def simulate(initial, breakdown, population = 8192, occurrence = 0.01)
   population = Array.new(population, false)
   population.map! { |e| rand < occurrence }
   population = [population] #ugh
@@ -35,12 +35,12 @@ def simulate(initial, breakdown, population = 10000, occurrence = 0.01)
   return tests
 end
 
-SIMS = 10000
+SIMS = 50000
 #VARS = [ [10000,10], [1000,10], [100,10], [10,10], [1,10], [10000, 2],
 VARS = [ [128,2], [100, 2], [88,2], [80,2], [64,2], [50, 2], [40,2], [32,2], [25,2], [24, 2], [20,2], [16,2] ]
 # missing comma here leads to bad initial/breakdown and TypeErrors in simulate
 
-puts "Simulating 1% of 10,000..."
+puts "Simulating 1% of 8,192..."
 puts "Running each simulation #{SIMS} times..."
 
 VARS.each do |initial, breakdown|
@@ -49,5 +49,5 @@ VARS.each do |initial, breakdown|
     print "Simulating... #{(100 * i / SIMS).to_i}%\r"
     testsTotal += simulate(initial, breakdown)
   end
-  puts "Staring at #{initial}... \tdividing by #{breakdown}...\tAverage Tests: #{testsTotal/SIMS}"
+  puts "Staring at #{initial}...   \tdividing by #{breakdown}...\tAverage Tests: #{testsTotal/SIMS}"
 end
