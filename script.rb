@@ -35,8 +35,9 @@ def simulate(initial, breakdown, population = 10000, occurrence = 100)
   return tests
 end
 
-SIMS = 100
-VARS = [ [10000,10], [1000,10], [100,10], [10,10], [1,10] ]
+SIMS = 500
+VARS = [ [10000,10], [1000,10], [100,10], [10,10], [1,10],
+         [10000, 2], [1000, 2], [200, 2], [100, 2], [50, 2], [10, 2] ]
 
 puts "Simulating 1% of 10,000..."
 puts "Running each simulation #{SIMS} times..."
