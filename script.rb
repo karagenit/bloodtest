@@ -35,9 +35,10 @@ def simulate(initial, breakdown, population = 10000, occurrence = 0.01)
   return tests
 end
 
-SIMS = 5000
+SIMS = 10000
 #VARS = [ [10000,10], [1000,10], [100,10], [10,10], [1,10], [10000, 2],
-VARS = [ [1000, 2], [128,2], [100, 2], [90,2], [88,2], [84,2], [80,2], [64,2], [50, 2], [44,2], [40,2], [32,2], [25,2], [24, 2] ] # missing comma here leads to bad initial/breakdown and TypeErrors in simulate
+VARS = [ [128,2], [100, 2], [88,2], [80,2], [64,2], [50, 2], [40,2], [32,2], [25,2], [24, 2], [20,2], [16,2] ]
+# missing comma here leads to bad initial/breakdown and TypeErrors in simulate
 
 puts "Simulating 1% of 10,000..."
 puts "Running each simulation #{SIMS} times..."
@@ -45,6 +46,7 @@ puts "Running each simulation #{SIMS} times..."
 VARS.each do |initial, breakdown|
   testsTotal = 0
   for i in 1..SIMS do
+    print "Simulating... #{(100 * i / SIMS).to_i}%\r"
     testsTotal += simulate(initial, breakdown)
   end
   puts "Staring at #{initial}... \tdividing by #{breakdown}...\tAverage Tests: #{testsTotal/SIMS}"
