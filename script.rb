@@ -4,9 +4,9 @@
 # Initial size to pool by
 # Divisor to break down by
 #
-def simulate(initial, breakdown, population = 10000, occurrence = 100)
-  population = Array.new(population - occurrence, false) + Array.new(occurrence, true)
-  population.shuffle!
+def simulate(initial, breakdown, population = 10000, occurrence = 0.01)
+  population = Array.new(population, false)
+  population.map! { |e| rand < occurrence }
   population = [population] #ugh
 
   tests = 0
