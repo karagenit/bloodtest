@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+
+void setup() {
+    srand(time(NULL));
+}
 
 int containsAny(char *array, int length) {
     for (int i = 0; i < length; i++) {
