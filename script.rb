@@ -21,7 +21,9 @@ loadSim.call(1)
 
 POP  = 10000
 PROB = 0.01
-SIMS = 100000
+SIMS = 1000
+THREADCNT = 4
+TSIMS = SIMS / THREADCNT # per thread
 
 puts "Simulating #{(PROB * 100).round}% of #{POP}..."
 puts "Running each simulation #{SIMS} times..."
@@ -30,11 +32,19 @@ outdata = []
 
 for initial in 10..150 do
   breakdown = 2
-  testsTotal = 0
-  for i in 1..SIMS do
-    print "Simulating... #{(100 * i / SIMS).to_i}%\r"
-    testsTotal += simulate.call(initial, breakdown, POP, PROB)
+  threads = []
+  (THREADCNT).times do
+    thread = Thread.new do
+      testsTotal = 0
+      for i in 1..TSIMS do
+        print "Simulating... #{(100 * i / TSIMS).to_i}%\r"
+        testsTotal += simulate.call(initial, breakdown, POP, PROB)
+      end
+      testsTotal # set Thread.value
+    end
+    threads.push thread
   end
+  testsTotal = threads.inject(0) { |sum, thr| sum += thr.value }
   avgTest = (testsTotal / SIMS).round
   outdata.push([initial, breakdown, avgTest])
   puts "Staring at #{initial}...   \tdividing by #{breakdown}...\tAverage Tests: #{avgTest}"
