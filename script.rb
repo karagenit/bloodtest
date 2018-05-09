@@ -21,7 +21,8 @@ loadSim.call()
 
 POP  = 10000
 PROB = 0.01
-SIMS = 100000
+SIMS = 100
+DIVISOR = 2
 
 puts "Simulating #{(PROB * 100).round}% of #{POP}..."
 puts "Running each simulation #{SIMS} times..."
@@ -29,15 +30,14 @@ puts "Running each simulation #{SIMS} times..."
 outdata = []
 
 for initial in 10..150 do
-  breakdown = 2
   testsTotal = 0
   for i in 1..SIMS do
     print "Simulating... #{(100 * i / SIMS).to_i}%\r"
-    testsTotal += simulate.call(initial, breakdown, POP, PROB)
+    testsTotal += simulate.call(initial, DIVISOR, POP, PROB)
   end
   avgTest = (testsTotal / SIMS).round
-  outdata.push([initial, breakdown, avgTest])
-  puts "Staring at #{initial}...   \tdividing by #{breakdown}...\tAverage Tests: #{avgTest}"
+  outdata.push([initial, DIVISOR, avgTest])
+  puts "Staring at #{initial}...   \tdividing by #{DIVISOR}...\tAverage Tests: #{avgTest}"
 end
 
-IO.write("output.csv", outdata.map(&:to_csv).join)
+IO.write("./output/#{SIMS}-#{POP}-#{(100 * PROB).round}-#{DIVISOR}.csv", outdata.map(&:to_csv).join)
