@@ -21,7 +21,7 @@ loadSim.call()
 
 POP  = 10000
 PROB = 0.01
-SIMS = 100
+SIMS = 10000
 DIVISOR = 2
 
 puts "Simulating #{(PROB * 100).round}% of #{POP}..."
