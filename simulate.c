@@ -38,7 +38,7 @@ int simulate(int initial, int divisor, int populationSize, double probability) {
     int tests = 0;
 
     for (int groupSize = initial; groupSize > 0 && !containsAll(checked, populationSize);
-            groupSize = (groupSize / divisor) + (groupSize % divisor)) { //modulo only works w/ 2
+            groupSize = (groupSize / divisor) + ((groupSize % divisor) != 0)) {
 
         for (int index = 0; index < populationSize; index += groupSize) {
             if (checked[index]) { // this group was checked before
