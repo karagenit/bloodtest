@@ -13,11 +13,11 @@ simulate = Fiddle::Function.new(
 
 loadSim = Fiddle::Function.new(
   libSimulate['setup'],
-  [Fiddle::TYPE_VOID],
+  [],
   Fiddle::TYPE_VOID
 )
 
-loadSim.call(1)
+loadSim.call()
 
 POP  = 10000
 PROB = 0.01
