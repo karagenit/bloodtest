@@ -2,7 +2,14 @@
 
 require 'csv'
 
-data = CSV.parse(IO.read('output.csv'))
+file = ARGV[0]
+
+if file.nil? || !File.file?(file)
+  puts "Usage: analyze.rb FILENAME.csv"
+  exit
+end
+
+data = CSV.parse(IO.read(file))
 
 data.sort! { |x, y| x[2] <=> y[2] }
 
