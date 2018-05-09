@@ -22,14 +22,14 @@ loadSim.call()
 POP  = 10000
 PROB = 0.01
 SIMS = 10000
-DIVISOR = 2
+DIVISOR = 3
 
 puts "Simulating #{(PROB * 100).round}% of #{POP}..."
 puts "Running each simulation #{SIMS} times..."
 
 outdata = []
 
-for initial in 10..150 do
+for initial in 2..300 do
   testsTotal = 0
   for i in 1..SIMS do
     print "Simulating... #{(100 * i / SIMS).to_i}%\r"
@@ -40,4 +40,8 @@ for initial in 10..150 do
   puts "Staring at #{initial}...   \tdividing by #{DIVISOR}...\tAverage Tests: #{avgTest}"
 end
 
-IO.write("./output/#{SIMS}-#{POP}-#{(100 * PROB).round}-#{DIVISOR}.csv", outdata.map(&:to_csv).join)
+filename = "./output/#{SIMS}-#{POP}-#{(100 * PROB).round}-#{DIVISOR}.csv"
+unless File.file? (filename)
+  IO.write(filename, outdata.map(&:to_csv).join)
+  puts "Wrote data to CSV file."
+end
