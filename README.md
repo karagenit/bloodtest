@@ -6,9 +6,7 @@ Let's say we have a population of N = 10,000, and we want to find each individua
 
 **CSV Naming**
 
-`TRIALS-POPULATION-PROBABILITY-DIVISOR.csv`
-
-The only thing left out is the range of group sizes used in each iteration of simulations.
+`TRIALS-POPULATION-PROBABILITY-DIVISOR-GROUPRANGE.csv`
 
 ## Mathematics
 
